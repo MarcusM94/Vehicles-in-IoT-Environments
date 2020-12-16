@@ -1,9 +1,25 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QtCore/QDateTime>
 #include <QtMqtt/QMqttClient>
 #include <QtWidgets/QMessageBox>
+
+#include <QFile>
+#include <QFileDialog>
+#include <QLabel>
+#include <QtNetwork/QSslKey>
+#include <QSslKey>
+#include <QtNetwork/QSslCertificate>
+
+QByteArray readKey(const QString &fileName)
+{
+    QFile input(fileName);
+    if (!input.exists() || !input.open(QIODevice::ReadOnly)) {
+        qWarning() << "Could not open key file for reading";
+        return QByteArray();
+    }
+    return input.readAll();
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,7 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QSslConfiguration conf;
     conf.setCaCertificates(QSslCertificate::fromPath(rootCA));
     conf.setLocalCertificateChain(QSslCertificate::fromPath(local));
-    QSslKey sslkey(readKey(key), QSsl::Rsa);
+    QFile keyFile(key);
+    QSslKey sslkey(&keyFile, QSsl::Rsa);
+    //QSslKey sslkey(readKey(key)), QSsl::Rsa);
     conf.setPrivateKey(sslkey);
 
     m_client->connectToHostEncrypted(conf);
