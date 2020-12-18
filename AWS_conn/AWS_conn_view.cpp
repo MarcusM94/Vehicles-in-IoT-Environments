@@ -1,5 +1,5 @@
 #include "AWS_conn_view.h"
-#include "ui_providerconnectionview.h"
+#include "ui_AWS_conn_view.h"
 
 AWSConnectionView::AWSConnectionView(QWidget *parent) :
     QWidget(parent),

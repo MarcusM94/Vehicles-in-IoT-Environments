@@ -1,11 +1,11 @@
-#include "mainwindow.h"
+#include "AWS_provider.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.addProvider(QStringLiteral("AWS Iot Core"), new AwsProvider());
+    AWSProvider w;
+    //w.addProvider(QStringLiteral("AWS Iot Core"), new AWSProvider());
     w.show();
 
     return a.exec();

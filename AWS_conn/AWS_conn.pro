@@ -23,22 +23,18 @@ SOURCES += \
         AWS.cpp \
         AWS_base.cpp \
         AWS_conn_view.cpp \
-        main.cpp \
-        providerbase.cpp \
-        providerconnectionview.cpp \
-        providerselector.cpp
+        AWS_provider.cpp \
+        main.cpp
 
 HEADERS += \
         2.h \
         AWS_base.h \
         AWS_conn_view.h \
-        providerbase.h \
-        providerconnectionview.h \
-        providerselector.h
+        AWS_provider.h
 
 FORMS += \
-        providerconnectionview.ui \
-        providerselector.ui
+        AWS_conn_view.ui\
+        AWS_conf_provider.ui
 
 # AWS
 !contains(CONFIG, NO_AWS) {
