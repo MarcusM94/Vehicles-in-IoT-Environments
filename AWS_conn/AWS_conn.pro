@@ -43,7 +43,7 @@ FORMS += \
     HEADERS += \
             awsprovider.h
     FORMS += \
-            awsconfiguration.ui
+            awsconfiguration.ui\
     DEFINES += WITH_AWS
 }
 

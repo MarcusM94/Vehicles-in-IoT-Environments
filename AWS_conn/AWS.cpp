@@ -1,5 +1,6 @@
 #include "AWS_provider.h"
 #include "ui_AWS_conf_provider.h"
+#include "ui_AWS_conn_view.h"
 
 #include <QFile>
 #include <QFileDialog>
