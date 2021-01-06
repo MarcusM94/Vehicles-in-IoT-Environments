@@ -36,16 +36,7 @@ FORMS += \
         AWS_conn_view.ui\
         AWS_conf_provider.ui
 
-# AWS
-!contains(CONFIG, NO_AWS) {
-    SOURCES += \
-            awsprovider.cpp
-    HEADERS += \
-            awsprovider.h
-    FORMS += \
-            awsconfiguration.ui\
-    DEFINES += WITH_AWS
-}
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
