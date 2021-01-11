@@ -13,7 +13,12 @@ The Web Dashboard is developed using HTML, CSS and JavaScript (read the README f
 
 Usage
 ------------
+#### To use the client feature
+For the client feature we followed [this](https://www.qt.io/blog/2019/08/29/cloud-providers-telemetry-via-qt-mqtt) blog post that was very helpful.
+Since we only needed to connect to AWS we did not use all of the suggestions for the rest of the cloud services.
+In order to use the client feature simply clone the "dva313-aws" files and run the code.
 
+Credits : [here] (https://github.com/mauricek/qtmqtt_cloud_connectors)
 #### To visualize the Dashboard
 
 The dashboard it's actually a website. To assure that everything works you have to host it.
