@@ -7,7 +7,7 @@ AWS.config.update({
     secretAccessKey: "NlX6LTY4xNh0UPeGA79sO0c2eCQ3D8DEvkBmgKJp"
   });
 AWS.config.update({ region: 'eu-north-1' });
-const documentClient = new AWS.DynamoDB.DocumentClient();
+var docClient = new AWS.DynamoDB.DocumentClient();
 
 
 function set_vehicles_sidebar(){
@@ -15,7 +15,7 @@ function set_vehicles_sidebar(){
   const scanAll = async (params, li_id_x) => {
 
     var itemsAll = [];
-    var data = await documentClient.scan(params).promise();
+    var data = await docClient.scan(params).promise();
     for (const item of data.Items) {
 
       // Sidebar population with vehicles names divided by fleets
@@ -84,53 +84,6 @@ function set_vehicles_sidebar(){
   var itemsAllz = scanAll(params, "vehicles-li");
   var itemsAllz = scanAll(params2, "vehicles-li-2");
 }
-
-
-  var docClient = new AWS.DynamoDB.DocumentClient();
-
-  function readItem(vehicle_id, element_id) {
-      var table = "real_time_test";
-
-      var params = {
-          TableName: table,
-          Key:{
-              "ID": vehicle_id
-          }
-      };
-
-      docClient.get(params, function(err, data) {
-          if (err) {
-              console.log("Unable to read item: " + "\n" + JSON.stringify(err, undefined, 2));
-          } else {
-              //with data you visualize all the JSON response. With data.Item.x you visualize just the value of the field x
-              //temperature_value=""+JSON.stringify(data.Item.engine_temperature, undefined, 2);
-              document.getElementById(`${element_id}`).innerHTML = ""+JSON.stringify(data.Item.temperature, undefined, 2);
-          }
-      });
-  }
-
-  function readItem_2(vehicle_id, callback) {
-      var table = "real_time_test";
-      var temperature_value;
-      var params = {
-          TableName: table,
-          Key:{
-              "ID": vehicle_id
-          }
-      };
-
-      docClient.get(params, function(err, data) {
-          if (err) {
-              console.log("Unable to read item: " + "\n" + JSON.stringify(err, undefined, 2));
-              return 0;
-          } else {
-              //with data you visualize all the JSON response. With data.Item.x you visualize just the value of the field x
-              //temperature_value=""+JSON.stringify(data.Item.engine_temperature, undefined, 2);
-              callback(data.Item.temperature);
-              return;
-          }
-      });
-  }
 
   async function readItem_3(vehicle_id) {
       var res = vehicle_id.split("/");
@@ -329,6 +282,9 @@ function set_vehicles_sidebar(){
     await promise_result.then(function(result) {
         tilt=""+result;
     });
+
+    promise_result=readItem(vehicle_id, "temperature");
+    console.log(promise_result);
 
     document.getElementById("engine_temperature_value").innerHTML=""+temperature_value+"°";
     document.getElementById("status_value").innerHTML=""+status;
